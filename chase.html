@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Chaser Game ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #ffcccb; /* Light pink background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #heart {
+            position: absolute;
+            font-size: 3em;
+            cursor: pointer;
+            transition: all 0.2s ease-out; /* Smooth movement */
+        }
+    </style>
+</head>
+<body>
+    <div id="heart">❤️</div>
+
+    <script>
+        const heart = document.getElementById("heart");
+
+        // Function to move the heart towards the cursor
+        function moveHeart(event) {
+            const mouseX = event.clientX; // Cursor X position
+            const mouseY = event.clientY; // Cursor Y position
+
+            // Get the current position of the heart
+            const heartRect = heart.getBoundingClientRect();
+            const heartX = heartRect.left + heartRect.width / 2; // Center of the heart
+            const heartY = heartRect.top + heartRect.height / 2;
+
+            // Calculate the distance between the heart and the cursor
+            const deltaX = mouseX - heartX;
+            const deltaY = mouseY - heartY;
+
+            // Move the heart towards the cursor
+            const speed = 0.8; // Adjust speed here (0.1 = slow, 0.5 = fast)
+            const newX = heartX + deltaX * speed;
+            const newY = heartY + deltaY * speed;
+
+            // Update the heart's position
+            heart.style.left = (newX - heartRect.width / 2) + "px";
+            heart.style.top = (newY - heartRect.height / 2) + "px";
+
+            // Check if the heart is close to the cursor
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            if (distance > 150) { // If the heart is not close to the cursor
+                heart.textContent = "😢"; // Change to crying emoji
+            } else {
+                heart.textContent = "❤️"; // Change back to heart emoji
+            }
+        }
+
+        // Track cursor movement
+        document.addEventListener("mousemove", moveHeart);
+    </script>
+</body>
+</html>
