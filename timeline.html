@@ -1,0 +1,26 @@
+<div class="option" onclick="toggleCalendar()">yad hai tumhe?</div>
+
+<div id="calendar" class="hidden" style="margin-top: 20px; text-align: left; padding: 20px; background: rgba(255, 255, 255, 0.8); border-radius: 10px; color: #ff3366; font-size: 1.2em;">
+    <h2 style="text-align: center; color: #ff0066;">hamara ab tak ka khubsurat safar </h2>
+    <ul>
+        <li><strong>22nd Feb 2001:</strong> Ek bahut pyari pari aayi is duniya mein. &#128150;</li>
+        <li><strong>16th Aug 2004:</strong> Ek badmash ladka janma. &#128540;</li>
+        <li><strong>21st Aug 2015:</strong> Ham dono ek jagah pahunche - hamara pehla ghar jese school, JNV Purnia. &#127979;</li>
+        <li><strong>Feb 2020 (9th class ke last me):</strong> Pehli baar special feeling hui. &#128149;</li>
+        <li><strong>21st July 2020:</strong> Regional ke baad sabse pyara jhagda. &#129325;</li>
+        <li><strong>9th Jan 2021:</strong> I proposed you. &#10084;&#65039;</li>
+        <li><strong>10th Jan 2021:</strong> You accepted, and our love story officially began. &#128145;</li>
+      <li><strong>And we are together till today in this wonderful journey</li>
+    </ul>
+</div>
+
+<script>
+    function toggleCalendar() {
+        var calendar = document.getElementById("calendar");
+        if (calendar.classList.contains("hidden")) {
+            calendar.classList.remove("hidden");
+        } else {
+            calendar.classList.add("hidden");
+        }
+    }
+</script>
