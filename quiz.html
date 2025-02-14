@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Kitna Janti Ho Tum Mujhe?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            overflow-x: hidden;
+            background-color: #ff0066;
+            color: white;
+        }
+
+        #quizContainer {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            color: #ff3366;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .question-block {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff3366;
+        }
+
+        .question-block p {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .question-block button {
+            display: block;
+            margin: 5px auto;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 80%;
+            transition: 0.3s;
+        }
+
+        .question-block button:hover {
+            background-color: #e62e5e;
+        }
+
+        #resultContainer {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            color: #ff3366;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <div id="quizContainer"></div>
+    <div id="resultContainer"></div>
+
+    <script>
+        const quizData = [
+            { question: "What could be my possible password?", options: ["5556mani", "mani5556", "5556loma", "loma5556"], answer: 2 },
+            { question: "Which travelling activity do I like most?", options: ["Jungle Safari", "Mountains and Trek", "Beach", "Mega Cities"], answer: 1 },
+            { question: "Which country do I want to visit?", options: ["America", "England", "Switzerland", "Russia"], answer: 2 },
+            { question: "If a particle is in SHM with mass 55kg and its frequency is 56, then what is its average after 1050 oscillations?", options: ["12", "13", "0", "55"], answer: 2 },
+            { question: "If I ever get the chance to leave the world for a long time for a very exciting research opportunity, will I go?", options: ["Yes", "No", "You will never get that", "I will force you"], answer: 1 },
+            { question: "7th class ke Saraswati Puja me mene konse color ka shirt pehna tha?", options: ["Red", "Brown", "Blue", "Black"], answer: 2 },
+            { question: "When is my on-certificate birthday?", options: ["22 August", "15 August", "10 August", "7 August"], answer: 2 },
+            { question: "I have done my winter internship under a professor whose name starts with which alphabet?", options: ["B", "A", "H", "N"], answer: 0 },
+            { question: "What is the name of my first social media account?", options: ["Mani", "Manish Kumar", "Rishu Raj", "Manish Raj"], answer: 2 },
+            { question: "Journey till this was long, but we evolved a great understanding as great partners and even greater friends. What do you say?", options: ["I don't care", "Absolutely Yes", "No and Never", "Not Sure"], answer: 1 },
+        ];
+
+        let score = 0;
+        let wrongAnswers = 0;
+        let userAnswers = [];
+
+        function startQuiz() {
+            const quizContainer = document.getElementById("quizContainer");
+            quizContainer.innerHTML = "";
+
+            quizData.forEach((q, index) => {
+                let questionBlock = document.createElement("div");
+                questionBlock.classList.add("question-block");
+                questionBlock.id = `question-${index}`;
+
+                let questionText = `<p>${q.question}</p>`;
+                questionBlock.innerHTML = questionText;
+
+                q.options.forEach((opt, i) => {
+                    let button = document.createElement("button");
+                    button.innerText = opt;
+                    button.onclick = function () { selectAnswer(index, i, button); };
+                    questionBlock.appendChild(button);
+                });
+
+                quizContainer.appendChild(questionBlock);
+            });
+        }
+
+        function selectAnswer(qIndex, chosen, button) {
+            if (userAnswers[qIndex] !== undefined) return; // Prevent multiple answers for the same question
+
+            userAnswers[qIndex] = chosen; // Store the user's answer
+
+            const questionBlock = document.getElementById(`question-${qIndex}`);
+            const buttons = questionBlock.getElementsByTagName("button");
+
+            // Reset colors of all buttons in the same question
+            Array.from(buttons).forEach((btn, index) => {
+                btn.style.backgroundColor = '#ff3366'; // Reset to default color
+                btn.innerHTML = quizData[qIndex].options[index]; // Remove emojis
+            });
+
+            // Change the color of the selected button and display emoji
+            if (chosen === quizData[qIndex].answer) {
+                button.style.backgroundColor = '#28a745'; // Green for correct
+                button.innerHTML += " 🙂"; // Smiley emoji for correct answer
+                score += 4;
+            } else {
+                button.style.backgroundColor = '#8B0000'; // Red for wrong
+                button.innerHTML += " 😡"; // Angry emoji for wrong answer
+                wrongAnswers++;
+            }
+
+            // Check if all questions are answered
+            if (userAnswers.filter(ans => ans !== undefined).length === quizData.length) {
+                setTimeout(showResult, 1000); // Show result after 1 sec delay
+            }
+        }
+
+        function showResult() {
+            const resultContainer = document.getElementById("resultContainer");
+            resultContainer.innerHTML = `
+                <h2>Quiz Results</h2>
+                <p>Total Correct Answers: ${score / 4}</p>
+                <p>Total Wrong Answers: ${wrongAnswers}</p>
+                <p>Total Points: ${score}</p>
+                <p>Total Kiss Penalties: 😘 x${wrongAnswers}</p>
+                
+            `;
+            resultContainer.style.display = "block";
+        }
+
+        startQuiz();
+    </script>
+</body>
+</html>
