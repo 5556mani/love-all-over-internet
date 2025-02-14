@@ -1,0 +1,84 @@
+<div id="question-container">
+    <p id="question" class="question-text">Do you like me?</p>
+    <div class="option-container">
+        <button id="yes-btn" class="option-btn" onclick="handleAnswer('yes')">Yes</button>
+        <button id="no-btn" class="option-btn" onclick="handleAnswer('no')">No</button>
+    </div>
+</div>
+
+<script>
+    const noResponses = [
+        "Aww, come on, think again! Do you like me? \u2764\uFE0F",
+        "I know you do, just say yes! \u2764\uFE0F",
+        "Why wait? You know you like me! \uD83D\uDE18",
+        "Take your time, but don't keep me waiting too long! \u23F3",
+        "I amm waiting for the right answer... \uD83D\uDE15"
+    ];
+    
+    let noResponseIndex = 0;  // Tracks the current response to show
+
+    function handleAnswer(answer) {
+        const questionText = document.getElementById("question");
+        
+        if (answer === "yes") {
+            questionText.textContent = "You are mine, hurry! \u2764\uFE0F";
+            questionText.style.color = "#ff3366"; // Vibrant, passionate color for yes response
+            document.getElementById("yes-btn").style.display = "none"; // Hide buttons after selecting yes
+            document.getElementById("no-btn").style.display = "none";
+        } else {
+            questionText.textContent = noResponses[noResponseIndex];
+            questionText.style.color = "#ff9900"; // Bold yellow-orange for no responses
+
+            // Cycle through the responses
+            noResponseIndex = (noResponseIndex + 1) % noResponses.length;
+        }
+    }
+</script>
+
+<!-- Updated CSS for the interaction -->
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #fff8f0;
+        color: #ff3366;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .question-text {
+        font-size: 3em;
+        color: #ff3366;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Adds a shadow for better readability */
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .option-container {
+        margin-top: 30px;
+    }
+
+    .option-btn {
+        margin: 20px;
+        padding: 20px 40px;
+        background-color: #ff3366;
+        color: white;
+        border: none;
+        font-size: 1.5em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease, background-color 0.3s;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow to make buttons pop */
+    }
+
+    .option-btn:hover {
+        transform: scale(1.1);
+        background-color: #ff6699;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+</style>
