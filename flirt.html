@@ -1,0 +1,49 @@
+    <div class="option" onclick="alert('Flirty Lines Incoming!')">kabhi kabhi flirt kar leta hun</div>
+
+    <div id="flirtSection" class="hidden">
+        <h2 style="font-size: 2em; color: #b3003b; font-weight: bold; text-decoration: underline;">Flirty and Cheesy Lines</h2>
+        <p style="font-size: 1.6em; color: #ff6699; margin: 15px 0;">"Are you made of sugar? Because you make my heart melt."</p>
+        <p style="font-size: 1.6em; color: #ff6699; margin: 15px 0;">"Whenever I see you, my moment of inertia gets increased."</p>
+        <p style="font-size: 1.6em; color: #ff6699; margin: 15px 0;">"Are you a magician? Because whenever I look at you, everyone else disappears."</p>
+        <p style="font-size: 1.6em; color: #ff6699; margin: 15px 0;">"Are you French? Because Eiffel for you!"</p>
+        <p style="font-size: 1.6em; color: #ff6699; margin: 15px 0;">"I want to be completely inside your mind, inside your chambers of heart and inside of yours.......!"</p>
+        <p style="font-size: 1.6em; color: #ff6699; margin: 15px 0;">"You must be tired, let me help in your cardio!"</p>
+        <p style="font-size: 1.6em; color: #ff6699; margin: 15px 0;">"Are you a campfire? Because you're hot and I want s'more!"</p>
+        <p style="font-size: 1.6em; color: #ff6699; margin: 15px 0;">"You must be a parking ticket, because you have got FINE written all over you... let us explore each other a bit more!"</p>
+        <p style="font-size: 1.6em; color: #ff6699; margin: 15px 0;">"If I were to rearrange the alphabet, I will put U and I together and then, let us see where the night takes us!"</p>
+    </div>
+
+    <script>
+        document.querySelector(".option:nth-child(4)").addEventListener("click", function() {
+            document.getElementById("flirtSection").classList.toggle("hidden");
+        });
+    </script>
+
+    <style>
+        #flirtSection {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            color: #ff6699;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        #flirtSection p {
+            font-family: 'Dancing Script', cursive;
+            transition: color 0.3s ease;
+        }
+
+        #flirtSection p:hover {
+            color: #ff0066;
+        }
+
+        h2 {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            margin-bottom: 20px;
+            color: #b3003b; /* Darker contrasting color */
+            text-decoration: underline;
+        }
+    </style>
